@@ -1,6 +1,7 @@
 package com.example.mycomposecodelab
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -25,10 +26,16 @@ fun WaterCounter(modifier: Modifier = Modifier) {
             Text("You've had $count glasses.")
         }
 
-        Button(
-            onClick = { count++ },
-            enabled = count < 10) {
-            Text("Add one")
+        Row(Modifier.padding(top = 0.dp)) {
+            Button(
+                onClick = { count++ },
+                enabled = count < 10) {
+                Text("Add one")
+            }
+            Button(onClick = { count = 0 }, Modifier.padding(start = 8.dp)) {
+                Text(text = "Clear water count")
+            }
         }
+
     }
 }
