@@ -9,10 +9,17 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
+
+// Stateless
 @Composable
 fun WellnessTaskItem(
     taskName: String,
@@ -25,7 +32,9 @@ fun WellnessTaskItem(
         modifier = modifier, verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            modifier = Modifier.weight(1f).padding(start = 16.dp),
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 16.dp),
             text = taskName
         )
         Checkbox(
@@ -36,4 +45,24 @@ fun WellnessTaskItem(
             Icon(Icons.Filled.Close, contentDescription = "Close")
         }
     }
+}
+
+// Stateful
+@Composable
+fun WellnessTaskItem(
+    taskName: String,
+    modifier: Modifier = Modifier) {
+    var checkedState  by remember {
+        mutableStateOf(false)
+    }
+
+    WellnessTaskItem(
+        taskName = taskName,
+        checked = checkedState ,
+        onCheckedChange = {
+            checkedState = it
+        },
+        onClose = {},
+        modifier = modifier
+    )
 }
